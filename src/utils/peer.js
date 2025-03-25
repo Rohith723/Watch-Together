@@ -1,10 +1,13 @@
 import Peer from "peerjs";
 
-export const createPeer = () => {
-  return new Peer({
-    host: "localhost",
-    port: 9000,  // Ensure your PeerJS server is running on this port
-    path: "/peerjs",
-    debug: 3,
-  });
-};
+const peer = new Peer(undefined, {
+  host: "0.peerjs.com", // Public PeerJS server
+  port: 443,
+  secure: true
+});
+
+peer.on("open", (id) => {
+  console.log("Peer connected with ID:", id);
+});
+
+export default peer;

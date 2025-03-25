@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { useEffect } from "react";
+import peer from "./utils/peer"; // Import PeerJS instance
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 import Login from "./pages/Login";
@@ -8,6 +10,12 @@ import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 
 function App() {
+    useEffect(() => {
+        peer.on("open", (id) => {
+            console.log("My Peer ID:", id);
+        });
+    }, []);
+
     return (
         <AuthProvider>
             <Router>
